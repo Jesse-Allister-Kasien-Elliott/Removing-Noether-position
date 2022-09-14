@@ -1,0 +1,301 @@
+\documentclass[11pt]{article}
+%\usepackage{fullpage}
+\usepackage[left=1.87cm,right=1.87cm,top=1.87cm,bottom=1.87cm]{geometry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+%\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+
+% AMS packages
+\usepackage{multirow}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{float}%
+\usepackage{mathtools}
+\usepackage{amsthm} % Conflicts with llncs
+\usepackage{comment}
+% Colors
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{yhmath}
+\usepackage{mathdots}
+\usepackage{wasysym}
+%\usepackage{MnSymbol}
+%\usepackage[dvipsnames]{xcolor}
+
+% HURL
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=red,      
+    urlcolor=red,
+    citecolor=blue
+}
+\urlstyle{same}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+% Math commands
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Fp}{\mathbb{F}_p}
+\newcommand{\Fpp}{\mathbb{F}_{p^2}}
+\newcommand{\vp}{\varphi}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\vph}{\hat{\varphi}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Keywords command
+\providecommand{\keywords}[1]
+{
+  \smallskip\noindent\small	
+  \textbf{\textbf{Keywords---}} #1
+}
+\newcommand{\LC}[2]{\ensuremath{L_{[#1 : #2]}}}
+\newcommand{\Mont}[2]{\ensuremath{M_{#1, #2}}}
+\newcommand{\Id}{\mathcal{O}}
+
+% other shortcuts 
+\newcommand\todo[1]{(\textcolor{red}{{\bf todo}}: #1)}
+\def\td{(\textcolor{red}{{\bf todo}})}
+\newcommand\done[1]{- \textcolor{red}{{\bf done}} #1}
+\def\done{(\textcolor{red}{{\bf done}})}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclareMathOperator{\cswap}{cswap}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\chr}{char}
+\DeclareMathOperator{\bd}{bd}
+\DeclareMathOperator{\crit}{crit}
+
+% HURL
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=red,
+    filecolor=red,      
+    urlcolor=red,
+    citecolor=red
+}
+\urlstyle{same}
+
+
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+% Algorithms
+\usepackage[vlined,ruled,linesnumbered,titlenotnumbered]{algorithm2e}
+%\usepackage{algorithm2e}
+\newcommand{\Input}{\item[\textsc{Input:}]}
+\newcommand{\Output}{\item[\textsc{Output:}]}
+\newcommand{\Remark}{\item[\textsc{Remark:}]}
+\newcommand{\pushline}{\Indp}% Indent
+\newcommand{\popline}{\Indm\dosemic}% Undent
+\let\oldnl\nl% Store \nl in \oldnl
+\newcommand{\nonl}{\renewcommand{\nl}{\let\nl\oldnl}}% Remove line number for one line
+\makeatother
+
+% Misc Packages
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{xargs}
+\usepackage[symbol]{footmisc}
+
+% Tikz
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+
+
+% 
+\def\td{(\textcolor{red}{{\bf todo}}) }
+\def\why{(\textcolor{red}{{\bf why?}}) }
+
+
+
+
+
+
+
+
+\title{Removing the Noether position requirement}
+\author{}
+\date{}
+
+
+
+\begin{document}
+
+\maketitle
+
+For $i$ in
+$\{1,\dots,n\},$ consider the projections
+\begin{align*}
+    \vp_i: \C^n  &\rightarrow \C^i \\
+    (x_1,\hdots,x_n) &\mapsto  (x_1,\hdots,x_i)    
+\end{align*}
+\begin{align*}
+    \psi_i: \C^n  &\rightarrow \C^{n-1} \\
+    (x_1,\hdots,x_n) &\mapsto  (x_1,\hdots,x_{i-1},x_{i+1},\hdots,x_n)    
+\end{align*}
+\begin{align*}
+    \pi_i: \C^n  &\rightarrow \C \\
+    (x_1,\hdots,x_n) &\mapsto x_i.
+\end{align*}
+
+
+
+
+\begin{proposition}\label{prop:main}
+    Let $V \subset \C^n$ be a smooth affine variety and let $C$ be a connected component of $V \cap \R^n$ with dimension $d$. If, for all $i \in \{1,\hdots,n\}, C \cap \crit(\pi_i,V) = \emptyset$  and  $\pi_i(C) \not = \R$, then there exists distinct $i,j \in\{1,\hdots,n\}$ with
+    \[
+C \cap \{ x_i= x_j\} \not = \emptyset \textrm{ or }
+C \cap \{ x_i= -x_j\} \not = \emptyset. 
+    \]
+\end{proposition}
+
+
+
+
+\section*{First argument for Proposition \ref{prop:main}}
+
+
+
+
+
+
+
+
+
+\begin{proof}
+First assume that $\dim(C)=1$ and assume $n=2$. Since $\pi_1(C) \not = \R$ and $C \not = \emptyset$, there exists 
+\[
+a \in \bd(\pi_1(C)) = \overline{\pi_1(C)} - \pi_1^o(C).
+\]
+And since $C \cap \crit(\pi_1,C) = \emptyset,$ we know that $a \not \in \pi_1(C).$ Now, it follows that there exists a sequence $(\alpha_l)_{l \in \N} \subset C$ with $\pi_1(\alpha_l) \rightarrow a$ as $l \rightarrow \infty$ and $|| \alpha_l|| \rightarrow \pm\infty$ as $l \rightarrow \infty.$ It must therefore be that 
+\[
+\pi_2(\alpha_l) - \pi_1(\alpha_l) \rightarrow \pm\infty ~(assume +\infty~ WLOG).
+\]
+Now, similarly, there exists 
+\[
+b \in \bd(\pi_2(C)) = \overline{\pi_2(C)} - \pi_2^o(C), b \not \in \pi_2(C).
+\]
+Let $(\beta_k)_{k \in \N} \subset C$ with $\pi_2(\beta_k) \rightarrow b$ and $|| \beta_k|| \rightarrow \infty.$ And clearly we have that 
+\[
+\pi_1(\beta_k) - \pi_2(\beta_k) \rightarrow \infty
+\]
+so that $\pi_1(\beta_k) \rightarrow \infty.~\hdots$
+%
+%
+%
+\par 
+Now assume $n>2.$ Let 
+\[
+N = \big\{i \in \{1,\hdots,n\} ~|~ \psi_i(C) \textrm{ is closed}\big\}. 
+\]
+\begin{enumerate}
+    \item $N = \emptyset:$ 
+    \par 
+    Since $N$ is empty, $\vp_{n-1}(C)$ is not closed. It follows that $\dim(\vp_{n-1}(C))=1$ because, otherwise, since $C$ is non-empty  and since dimension can only decrease after projection, $\dim(\vp_{n-1}(C))=0$ implying that $\vp_{n-1}(C)$ is closed, a contradiction \lightning. Therefore, it follows that $\alpha \in \R^{n-1}$ exists with 
+    \[
+    \alpha \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C),~ \alpha \not \in \vp_{n-1}(C).
+    \]
+    In other words, $\alpha$ lies in the set of non-properness of $\vp_{n-1}|_C$. And therefore, a sequence $(\zeta_l)_{l \in \N} \subset C$ exists with $\vp_{n-1}(\zeta_l) \rightarrow \alpha$ and $\pi_n(\zeta_l) \rightarrow \infty.$ And, since, by assumption, 
+\[
+    C \cap \crit(\pi_n,V) = \emptyset \textrm{ and  } \pi_n(C) \not = \R,
+\]
+the projection $\pi_n(C)$ cannot be a bounded and open interval:
+\[
+\pi_n(C) = (e_n,+\infty) \textrm{ or } \pi_n(C) = (-\infty,e_n). 
+\]
+Now let $(\beta_l)_{l \in \N} \subset C$ with $\pi_n(\beta_l) \rightarrow e_n$. Then, since $\pi_n(C)$ is an open interval with boundary point $e_n$, there exists $i \in \{1,\hdots,n-1\}$ with $\pi_i(\beta_l) \rightarrow \infty$ and, again since \[
+    C \cap \crit(\pi_i,V) = \emptyset \textrm{ and  } \pi_i(C) \not = \R
+\]
+and $\pi_i(\beta_l) \rightarrow \infty$,
+\[
+\pi_i(C) = (e_i,+\infty) \textrm{ or } \pi_i(C) = (-\infty,e_i). 
+\]
+Now pick a sequence of points in $C$ who's $i$-th projection converges to $e_i:$ 
+\[
+(\gamma_l)_{l \in \N} \subset C,~ \pi_i(\gamma_l) \rightarrow e_i.
+\]
+It then follows that $\vp_{n-1}(\gamma_l) \rightarrow \alpha$. Indeed, since $\pi_i(\gamma_l) \rightarrow e_i$, it must be that 
+\[
+e_i \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C).
+\]
+To $l$ associate 
+\[
+l \mapsto \vp_{n-1}(C) \cap B(\alpha,1/l).
+\]
+For $l$ large enough, the intersection is not empty and
+%; when you find one point there, lift it and define $(\gamma_l)$ this way. 
+\[
+e_i =\pi_i\circ \vp_{n-1}(\alpha).
+\]
+We then have that $C$ will either intersect $x_n-x_i$ or $C$ will intersect $x_n+x_i$. By continuity, because $C$ is connected $x_i - x_n$ or $x_i+x_n$ has a sine change over $C$ (positive at one point, negative at another, and therefore 0 at someplace). 
+%
+\item $N \not = \emptyset:$
+\par 
+Mimic the same reasoning over $\psi_i(C)$. Replace $C$ with $\psi_i(C)$ and WLOG assume that $i$ is $n$ so we work in dimension $n-1$ with a closed semi-algebraic curve in $\R^{n-1}$. By an injection argument, we end up with the $n=2$ case (an inductive argument can be made with with having $n=2$ as the base case - \td).  
+\end{enumerate}
+
+
+\end{proof}
+
+
+
+\section*{Second argument for Proposition \ref{prop:main}}
+\begin{lemma}
+    There exists $i \in \{1,\hdots,n\}$ with $\pi_i(C)$ not bounded. WLOG assume $i=1.$
+\end{lemma}
+\begin{proof}
+    \td
+\end{proof}
+\noindent 
+Consider the following two cases. 
+\begin{enumerate}
+    \item $\vp_2(C)$ is closed:
+\newline 
+Then as $x_1 \rightarrow e_2, x_2 \rightarrow \infty$, and as  $x_2 \rightarrow e_1, x_1 \rightarrow \infty$. Therefore, we have a sign change of $x_1-x_2$ over the connected component. 
+    \item $\vp_2(C)$ is not closed:
+\newline 
+When approaching $\alpha$, some coordinate $x_i \rightarrow \infty.$ WLOG assume that $i=3.$ It must also be that when approaching $x_3$, $x_1 \rightarrow \infty$ because otherwise there is a boundary point and $\pi_1(C)$ is bounded, contradicting our assumption \lightning. Therefore, $x_1-x_3, x_1+x_2$ or $x_1+x_3$ (depending on whether or not we go to $\pm \infty$) will have a sign change over the connected component.
+\end{enumerate}
+\paragraph*{Comments:}
+\begin{itemize}
+    \item[--] Insight to generalize to the $d$-dimensional case? 
+    \item[--] It (the proof) tells us that we can read everything on some projection of dimension $d+1$.
+    \item[--] Gives a new ingredient: we can get the information by looking at the projections on spaces of dimension $d+1.$ 
+    \item[--] Our claim (in dimension 1) is basically that there is a 1 dimensional coordinate space such that the projection on the 1 dimensional coordinate space is unbounded.... could we prove (the following lemma)?
+\end{itemize}
+
+
+
+\begin{lemma}
+    Where $d = \dim (C),$ there exists $\{i_1,\hdots,i_d\} \subset \{1,\hdots,n\}$ with $\pi_j(C)$ unbounded (infinite?) for all $j \in \{i_1,\hdots,i_d\}.$
+\end{lemma}
+\begin{proof}
+    There exists $d$ generic hyperplnes $H_1,\hdots,H_d$ with $C \cap H_1 \cap \cdots \cap H_d$ finite, and the intersection of $C$ with any fewer of these hyperplanes is infinite. For each $k \in \{1,\hdots,d\}, C \cap H_k$ therefore also gives a distinct coordinate $x_{i_k}$ \color{red} (true?) \color{black} for which the projection $\pi_{i_k}(C)$ is infinite. Hence, we have $\{i_1,\hdots,i_d\} \subset \{1,\hdots,n\}$ with $\pi_j(C)$ infinite for all $j \in \{i_1,\hdots,i_d\}.$
+\end{proof}
+
+
+
+
+
+
+
+
+
+\end{document}
