@@ -1,37 +1,32 @@
 \documentclass[11pt]{article}
-%\usepackage{fullpage}
+% packages
 \usepackage[left=1.87cm,right=1.87cm,top=1.87cm,bottom=1.87cm]{geometry}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[utf8]{inputenc}
-%\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
-
-% AMS packages
+\usepackage{mathrsfs}
 \usepackage{multirow}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsmath}
-\usepackage{float}%
+\usepackage{float}
 \usepackage{mathtools}
-\usepackage{amsthm} % Conflicts with llncs
+\usepackage{amsthm} 
 \usepackage{comment}
-% Colors
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{yhmath}
 \usepackage{mathdots}
 \usepackage{wasysym}
-%\usepackage{MnSymbol}
-%\usepackage[dvipsnames]{xcolor}
+\usepackage{xargs}
+\usepackage[symbol]{footmisc}
 
 % HURL
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
-    linkcolor=black,
+    linkcolor=red,
     filecolor=red,      
     urlcolor=red,
-    citecolor=blue
+    citecolor=red
 }
 \urlstyle{same}
 
@@ -72,6 +67,9 @@
 \def\td{(\textcolor{red}{{\bf todo}})}
 \newcommand\done[1]{- \textcolor{red}{{\bf done}} #1}
 \def\done{(\textcolor{red}{{\bf done}})}
+\def\td{(\textcolor{red}{{\bf todo}}) }
+\def\why{(\textcolor{red}{{\bf why?}}) }
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclareMathOperator{\cswap}{cswap}
@@ -80,20 +78,6 @@
 \DeclareMathOperator{\bd}{bd}
 \DeclareMathOperator{\crit}{crit}
 
-% HURL
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=red,
-    filecolor=red,      
-    urlcolor=red,
-    citecolor=red
-}
-\urlstyle{same}
-
-
-
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 % Algorithms
 \usepackage[vlined,ruled,linesnumbered,titlenotnumbered]{algorithm2e}
@@ -107,25 +91,10 @@
 \newcommand{\nonl}{\renewcommand{\nl}{\let\nl\oldnl}}% Remove line number for one line
 \makeatother
 
-% Misc Packages
-\usepackage{mathtools}
-\usepackage{hyperref}
-\usepackage{xargs}
-\usepackage[symbol]{footmisc}
 
 % Tikz
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
-
-
-
-% 
-\def\td{(\textcolor{red}{{\bf todo}}) }
-\def\why{(\textcolor{red}{{\bf why?}}) }
-
-
-
-
 
 
 
@@ -140,6 +109,7 @@
 
 \maketitle
 
+\noindent 
 For $i$ in
 $\{1,\dots,n\},$ consider the projections
 \begin{align*}
@@ -154,10 +124,7 @@ $\{1,\dots,n\},$ consider the projections
     \pi_i: \C^n  &\rightarrow \C \\
     (x_1,\hdots,x_n) &\mapsto x_i.
 \end{align*}
-
-
-
-
+%
 \begin{proposition}\label{prop:main}
     Let $V \subset \C^n$ be a smooth affine variety and let $C$ be a connected component of $V \cap \R^n$ with dimension $d$. If, for all $i \in \{1,\hdots,n\}, C \cap \crit(\pi_i,V) = \emptyset$  and  $\pi_i(C) \not = \R$, then there exists distinct $i,j \in\{1,\hdots,n\}$ with
     \[
@@ -165,26 +132,39 @@ C \cap \{ x_i= x_j\} \not = \emptyset \textrm{ or }
 C \cap \{ x_i= -x_j\} \not = \emptyset. 
     \]
 \end{proposition}
+%
+\begin{lemma}\label{lemma:limitPoint}
+    For all $i \in \{1,\hdots,n\}$, there exists  $\alpha_i \in \R^{n-1}$ with 
+    \[
+\alpha_i \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C), ~\alpha \not \in \vp_{n-1}(C).
+    \]
+    \color{red}(Need $\dim(\vp_{n-1}(C))=1$?)\color{black}
+\end{lemma}
+\begin{proof}
+Since $\pi_i(C) \not = \R$ and since $C \not = \emptyset$, there exists 
+\[
+\alpha_i \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C).
+\]
+And since $C \cap \crit(\pi_i,V) = \emptyset, \alpha_i \not \in \pi_i(C).$
+\end{proof}
+%
 
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{First argument for Proposition \ref{prop:main}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assume the dimension of $C$ is $1$}
 
-
-
-
-
-
-
-
-\begin{proof}
-First assume that $\dim(C)=1$ and assume $n=2$. Since $\pi_1(C) \not = \R$ and $C \not = \emptyset$, there exists 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Assume $n=2$}
+By Lemma \ref{lemma:limitPoint}, there exists 
 \[
-a \in \bd(\pi_1(C)) = \overline{\pi_1(C)} - \pi_1^o(C).
+a \in \bd(\pi_1(C)) = \overline{\pi_1(C)} - \pi_1^o(C), a \not \in \pi_1(C).
 \]
-And since $C \cap \crit(\pi_1,C) = \emptyset,$ we know that $a \not \in \pi_1(C).$ Now, it follows that there exists a sequence $(\alpha_l)_{l \in \N} \subset C$ with $\pi_1(\alpha_l) \rightarrow a$ as $l \rightarrow \infty$ and $|| \alpha_l|| \rightarrow \pm\infty$ as $l \rightarrow \infty.$ It must therefore be that 
+Then, there exists a sequence $(\alpha_l)_{l \in \N} \subset C$ with $\pi_1(\alpha_l) \rightarrow a$ as $l \rightarrow \infty$ and $|| \alpha_l|| \rightarrow \pm\infty$ as $l \rightarrow \infty.$ It must therefore be that 
 \[
 \pi_2(\alpha_l) - \pi_1(\alpha_l) \rightarrow \pm\infty ~(assume +\infty~ WLOG).
 \]
@@ -196,19 +176,24 @@ Let $(\beta_k)_{k \in \N} \subset C$ with $\pi_2(\beta_k) \rightarrow b$ and $||
 \[
 \pi_1(\beta_k) - \pi_2(\beta_k) \rightarrow \infty
 \]
-so that $\pi_1(\beta_k) \rightarrow \infty.~\hdots$
-%
-%
-%
-\par 
-Now assume $n>2.$ Let 
+so that $\pi_1(\beta_k) \rightarrow \infty.$ And therefore we have a sign change with $x_1-x_2$ over the connected component and 
+    \[
+C \cap \{ x_i= -x_j\} \not = \emptyset. 
+    \]
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection*{Assume $n>2$}
+Let 
 \[
 N = \big\{i \in \{1,\hdots,n\} ~|~ \psi_i(C) \textrm{ is closed}\big\}. 
 \]
 \begin{enumerate}
     \item $N = \emptyset:$ 
     \par 
-    Since $N$ is empty, $\vp_{n-1}(C)$ is not closed. It follows that $\dim(\vp_{n-1}(C))=1$ because, otherwise, since $C$ is non-empty  and since dimension can only decrease after projection, $\dim(\vp_{n-1}(C))=0$ implying that $\vp_{n-1}(C)$ is closed, a contradiction \lightning. Therefore, it follows that $\alpha \in \R^{n-1}$ exists with 
+    Since $N$ is empty, $\vp_{n-1}(C)$ is not closed. It follows that $\dim(\vp_{n-1}(C))=1$ because, otherwise, since $C$ is non-empty  and since dimension can only decrease after projection, $\dim(\vp_{n-1}(C))=0$ implying that $\vp_{n-1}(C)$ is closed, a contradiction \lightning. Therefore, by Lemma \ref{lemma:limitPoint}, it follows that $\alpha \in \R^{n-1}$ exists with 
     \[
     \alpha \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C),~ \alpha \not \in \vp_{n-1}(C).
     \]
@@ -252,10 +237,16 @@ Mimic the same reasoning over $\psi_i(C)$. Replace $C$ with $\psi_i(C)$ and WLOG
 \end{enumerate}
 
 
-\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assume the dimension of $C$ is $d\geq 1$}
+\begin{itemize} 
+    \item[--] Now, assuming that $N= \emptyset,$ can we still argue that $\dim(\vp_{n-1}(C))=1?$ If not, we cannot use Lemma \ref{lemma:limitPoint}?
+\end{itemize} 
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Second argument for Proposition \ref{prop:main}}
 \begin{lemma}
     There exists $i \in \{1,\hdots,n\}$ with $\pi_i(C)$ not bounded. WLOG assume $i=1.$
@@ -263,16 +254,98 @@ Mimic the same reasoning over $\psi_i(C)$. Replace $C$ with $\psi_i(C)$ and WLOG
 \begin{proof}
     \td
 \end{proof}
-\noindent 
-Consider the following two cases. 
-\begin{enumerate}
-    \item $\vp_2(C)$ is closed:
-\newline 
-Then as $x_1 \rightarrow e_2, x_2 \rightarrow \infty$, and as  $x_2 \rightarrow e_1, x_1 \rightarrow \infty$. Therefore, we have a sign change of $x_1-x_2$ over the connected component. 
-    \item $\vp_2(C)$ is not closed:
-\newline 
-When approaching $\alpha$, some coordinate $x_i \rightarrow \infty.$ WLOG assume that $i=3.$ It must also be that when approaching $x_3$, $x_1 \rightarrow \infty$ because otherwise there is a boundary point and $\pi_1(C)$ is bounded, contradicting our assumption \lightning. Therefore, $x_1-x_3, x_1+x_2$ or $x_1+x_3$ (depending on whether or not we go to $\pm \infty$) will have a sign change over the connected component.
-\end{enumerate}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assume the dimension of $C$ is $1$}
+%
+%
+\begin{figure}[!h]
+    \centering
+    
+
+\begin{tikzpicture}
+
+%%    NODES   %%
+\node (20) at (-4,3) {$\pi_1^{-1}(U) \cap C$};
+\node (21) at (0,3) {$\pi_1^{-1}(\eta) \times U$};
+\node (100) at (0,1.5) {$U$};
+\node (Order2) at (-2,3.2) {$f$};
+
+%%    ARROWS    %%
+\draw [->] (20) -- (100);
+\draw [->] (21) -- (100);
+\draw [->] (20) -- (21);
+
+\end{tikzpicture}
+    \caption{A Nash version of Ehresmann's fibration theorem}
+    \label{fig:Ehresmann}
+\end{figure}
+%
+%
+\begin{proof}
+Let $U = (e_1,+\infty)$ and $\eta \in U.$ A Nash version of Ehresmann's fibration theorem \cite[Th. 2.4 and 3.1]{Shiota1992} can be given as shown in Figure \ref{fig:Ehresmann}. As a consequence of applying the theorem, we obtain a parameterization of $C$ in terms of semi-algebraic functions
+\[
+C = \big\{(t,g_2(t),\hdots,g_n(t))~|~ t \in \R\big\}
+\]
+The semi-algebraic functions $g_2(t),\hdots,g_n(t)$ are diffeomorphisms, and the tangent vector for $t \in \R$ is given by 
+\[
+\begin{pmatrix}
+    1 \\
+    g'_2(t)\\
+    \vdots\\
+    g'_n(t)\\
+\end{pmatrix}.
+\]
+The tangent vector at a critical point would give
+\[
+\begin{pmatrix}
+    1 \\
+    g'_2(t)\\
+    \vdots\\
+    g'_n(t)\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+    1 \\
+    0\\
+    \vdots\\
+    0\\
+\end{pmatrix}.
+\]
+Since by assumption, 
+\[
+C \cap \crit(\pi_i,V) = \emptyset, \forall i \in \{1,\hdots,n\},
+\]
+$g_2,\hdots,g_n$ therefore never vanish are are therefore monotonic. Now, consider the set 
+\[
+N_1 = \big\{i~|~g_i(t) \rightarrow \infty \textrm{ as } t \rightarrow e_1, \textrm{ and } g_i(t) \not \rightarrow \infty \textrm{ as } t \rightarrow \infty\big\},
+\]
+and notice that when $N_1 \not = \emptyset$ then $x_1 \pm x_i=0$ meets the connected component $C$, proving Proposition \ref{prop:main} for the $d=1$ case.  Now, since $g_2,\hdots,g_n$ are monotonic, it must be that $N_1$ is not empty. Indeed, firstly, there exists an $i$ with $g_i(t) \rightarrow \infty$ as $t \rightarrow e_1$ because $e_1$ is the boundary point of the projection on the $x_1$ axis. WLOG assume $i=2.$ Now, since $g_2(t)$ is monotonic, as $t$ ranges from $e_1$ to $+\infty, g_2(t)$ is decreasing and thus $g_2(t)$ is monotonically decreasing. We cannot have that $g_2(t)$ tends to $-\infty$ because then as $t$ tends from $e_1$ to $+\infty$, $g_2(t)$ would cover the entire real line which we have assumed is not the case. Therefore, $g_2(t) \rightarrow e_2$ as $t$ tends from $e_1$ to $+\infty$.
+\end{proof}
+%
+\begin{lemma}
+    
+\end{lemma}
+\begin{proof}
+Let $\mathscr{D} = \bd(\vp_2(C))$, let 
+\[
+T_{\epsilon}\mathscr{D} = \left\{\alpha \in \R\langle \epsilon \rangle^2~|~dist(\alpha,\mathscr{D}) \leq \epsilon \right\} 
+\]
+and let $(\zeta_l)_{l \in \N} \subset C$ be a sequence with 
+\[
+\zeta_l \in \pi_1^{-1}\left(e_1 + 1/l \right) \cap \vp_2^{-1}\left(T_{\epsilon}\mathscr{D}\right) \cap C \not = \emptyset~\td.
+\]
+By construction, $\pi_1(\zeta_l) \rightarrow e_1$. Now, 
+\[
+\pi_2(\vp_2(\zeta_l)) \rightarrow ?
+\]
+\td
+\end{proof}
+%
 \paragraph*{Comments:}
 \begin{itemize}
     \item[--] Insight to generalize to the $d$-dimensional case? 
@@ -284,16 +357,24 @@ When approaching $\alpha$, some coordinate $x_i \rightarrow \infty.$ WLOG assume
 
 
 \begin{lemma}
-    Where $d = \dim (C),$ there exists $\{i_1,\hdots,i_d\} \subset \{1,\hdots,n\}$ with $\pi_j(C)$ unbounded (infinite?) for all $j \in \{i_1,\hdots,i_d\}.$
+    Where $d = \dim (C),$ there exists $\{i_1,\hdots,i_d\} \subset \{1,\hdots,n\}$ with $\pi_j(C)$ unbounded for all $j \in \{i_1,\hdots,i_d\}.$
 \end{lemma}
+
 \begin{proof}
-    There exists $d$ generic hyperplnes $H_1,\hdots,H_d$ with $C \cap H_1 \cap \cdots \cap H_d$ finite, and the intersection of $C$ with any fewer of these hyperplanes is infinite. For each $k \in \{1,\hdots,d\}, C \cap H_k$ therefore also gives a distinct coordinate $x_{i_k}$ \color{red} (true?) \color{black} for which the projection $\pi_{i_k}(C)$ is infinite. Hence, we have $\{i_1,\hdots,i_d\} \subset \{1,\hdots,n\}$ with $\pi_j(C)$ infinite for all $j \in \{i_1,\hdots,i_d\}.$
+    
+\end{proof}
+
+\subsection*{Assume the dimension of $C$ is $d\geq 1$}
+\begin{proof}
+\td
 \end{proof}
 
 
 
 
 
+\bibliographystyle{plain}
+\bibliography{references.bib}
 
 
 
