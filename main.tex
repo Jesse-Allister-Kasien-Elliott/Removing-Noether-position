@@ -99,17 +99,33 @@
 
 
 
-\title{Removing the Noether position requirement}
-\author{}
+\title{A deterministic algorithm for computing one point in each connected component of a smooth real algebraic set}
+\author{Jesse Elliott\thanks{David R. Cheriton School of Computer Science, University of Waterloo, On, Canada}, Mohab Safey El Din\thanks{Sorbonne Universit\'e, CNRS, INRIA, Laboratoire d’Informatique de Paris 6, PolSys, Paris, France}, \'Eric Schost \thanks{David R. Cheriton School of Computer Science, University of Waterloo, On, Canada} 
+}
+
+
 \date{}
-
-
 
 \begin{document}
 
 \maketitle
 
-\noindent 
+
+
+
+\begin{abstract}
+This is an abstract \newline
+\keywords{Real algebraic geometry, polynomial system solving, complexity}
+\end{abstract}
+
+
+\newpage 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Removing the Noether position requirement}
 For $i$ in
 $\{1,\dots,n\},$ consider the projections
 \begin{align*}
@@ -133,127 +149,48 @@ C \cap \{ x_i= -x_j\} \not = \emptyset.
     \]
 \end{proposition}
 %
-\begin{lemma}\label{lemma:limitPoint}
-    For all $i \in \{1,\hdots,n\}$, there exists  $\alpha_i \in \R^{n-1}$ with 
-    \[
-\alpha_i \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C), ~\alpha \not \in \vp_{n-1}(C).
-    \]
-    \color{red}(Need $\dim(\vp_{n-1}(C))=1$?)\color{black}
-\end{lemma}
-\begin{proof}
-Since $\pi_i(C) \not = \R$ and since $C \not = \emptyset$, there exists 
-\[
-\alpha_i \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C).
-\]
-And since $C \cap \crit(\pi_i,V) = \emptyset, \alpha_i \not \in \pi_i(C).$
-\end{proof}
-%
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{First argument for Proposition \ref{prop:main}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Assume the dimension of $C$ is $1$}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection*{Assume $n=2$}
-By Lemma \ref{lemma:limitPoint}, there exists 
-\[
-a \in \bd(\pi_1(C)) = \overline{\pi_1(C)} - \pi_1^o(C), a \not \in \pi_1(C).
-\]
-Then, there exists a sequence $(\alpha_l)_{l \in \N} \subset C$ with $\pi_1(\alpha_l) \rightarrow a$ as $l \rightarrow \infty$ and $|| \alpha_l|| \rightarrow \pm\infty$ as $l \rightarrow \infty.$ It must therefore be that 
-\[
-\pi_2(\alpha_l) - \pi_1(\alpha_l) \rightarrow \pm\infty ~(assume +\infty~ WLOG).
-\]
-Now, similarly, there exists 
-\[
-b \in \bd(\pi_2(C)) = \overline{\pi_2(C)} - \pi_2^o(C), b \not \in \pi_2(C).
-\]
-Let $(\beta_k)_{k \in \N} \subset C$ with $\pi_2(\beta_k) \rightarrow b$ and $|| \beta_k|| \rightarrow \infty.$ And clearly we have that 
-\[
-\pi_1(\beta_k) - \pi_2(\beta_k) \rightarrow \infty
-\]
-so that $\pi_1(\beta_k) \rightarrow \infty.$ And therefore we have a sign change with $x_1-x_2$ over the connected component and 
-    \[
-C \cap \{ x_i= -x_j\} \not = \emptyset. 
-    \]
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection*{Assume $n>2$}
-Let 
-\[
-N = \big\{i \in \{1,\hdots,n\} ~|~ \psi_i(C) \textrm{ is closed}\big\}. 
-\]
-\begin{enumerate}
-    \item $N = \emptyset:$ 
-    \par 
-    Since $N$ is empty, $\vp_{n-1}(C)$ is not closed. It follows that $\dim(\vp_{n-1}(C))=1$ because, otherwise, since $C$ is non-empty  and since dimension can only decrease after projection, $\dim(\vp_{n-1}(C))=0$ implying that $\vp_{n-1}(C)$ is closed, a contradiction \lightning. Therefore, by Lemma \ref{lemma:limitPoint}, it follows that $\alpha \in \R^{n-1}$ exists with 
-    \[
-    \alpha \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C),~ \alpha \not \in \vp_{n-1}(C).
-    \]
-    In other words, $\alpha$ lies in the set of non-properness of $\vp_{n-1}|_C$. And therefore, a sequence $(\zeta_l)_{l \in \N} \subset C$ exists with $\vp_{n-1}(\zeta_l) \rightarrow \alpha$ and $\pi_n(\zeta_l) \rightarrow \infty.$ And, since, by assumption, 
-\[
-    C \cap \crit(\pi_n,V) = \emptyset \textrm{ and  } \pi_n(C) \not = \R,
-\]
-the projection $\pi_n(C)$ cannot be a bounded and open interval:
-\[
-\pi_n(C) = (e_n,+\infty) \textrm{ or } \pi_n(C) = (-\infty,e_n). 
-\]
-Now let $(\beta_l)_{l \in \N} \subset C$ with $\pi_n(\beta_l) \rightarrow e_n$. Then, since $\pi_n(C)$ is an open interval with boundary point $e_n$, there exists $i \in \{1,\hdots,n-1\}$ with $\pi_i(\beta_l) \rightarrow \infty$ and, again since \[
-    C \cap \crit(\pi_i,V) = \emptyset \textrm{ and  } \pi_i(C) \not = \R
-\]
-and $\pi_i(\beta_l) \rightarrow \infty$,
-\[
-\pi_i(C) = (e_i,+\infty) \textrm{ or } \pi_i(C) = (-\infty,e_i). 
-\]
-Now pick a sequence of points in $C$ who's $i$-th projection converges to $e_i:$ 
-\[
-(\gamma_l)_{l \in \N} \subset C,~ \pi_i(\gamma_l) \rightarrow e_i.
-\]
-It then follows that $\vp_{n-1}(\gamma_l) \rightarrow \alpha$. Indeed, since $\pi_i(\gamma_l) \rightarrow e_i$, it must be that 
-\[
-e_i \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C).
-\]
-To $l$ associate 
-\[
-l \mapsto \vp_{n-1}(C) \cap B(\alpha,1/l).
-\]
-For $l$ large enough, the intersection is not empty and
-%; when you find one point there, lift it and define $(\gamma_l)$ this way. 
-\[
-e_i =\pi_i\circ \vp_{n-1}(\alpha).
-\]
-We then have that $C$ will either intersect $x_n-x_i$ or $C$ will intersect $x_n+x_i$. By continuity, because $C$ is connected $x_i - x_n$ or $x_i+x_n$ has a sine change over $C$ (positive at one point, negative at another, and therefore 0 at someplace). 
-%
-\item $N \not = \emptyset:$
-\par 
-Mimic the same reasoning over $\psi_i(C)$. Replace $C$ with $\psi_i(C)$ and WLOG assume that $i$ is $n$ so we work in dimension $n-1$ with a closed semi-algebraic curve in $\R^{n-1}$. By an injection argument, we end up with the $n=2$ case (an inductive argument can be made with with having $n=2$ as the base case - \td).  
-\end{enumerate}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Assume the dimension of $C$ is $d\geq 1$}
-\begin{itemize} 
-    \item[--] Now, assuming that $N= \emptyset,$ can we still argue that $\dim(\vp_{n-1}(C))=1?$ If not, we cannot use Lemma \ref{lemma:limitPoint}?
-\end{itemize} 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Second argument for Proposition \ref{prop:main}}
 \begin{lemma}
     There exists $i \in \{1,\hdots,n\}$ with $\pi_i(C)$ not bounded. WLOG assume $i=1.$
 \end{lemma}
 \begin{proof}
     \td
 \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -281,15 +218,24 @@ Mimic the same reasoning over $\psi_i(C)$. Replace $C$ with $\psi_i(C)$ and WLOG
 \draw [->] (20) -- (21);
 
 \end{tikzpicture}
-    \caption{A Nash version of Ehresmann's fibration theorem}
+    \caption{(Finish diagram \td) A Nash version of Ehresmann's fibration theorem.}
     \label{fig:Ehresmann}
 \end{figure}
 %
 %
 \begin{proof}
-Let $U = (e_1,+\infty)$ and $\eta \in U.$ A Nash version of Ehresmann's fibration theorem \cite[Th. 2.4 and 3.1]{Shiota1992} can be given as shown in Figure \ref{fig:Ehresmann}. As a consequence of applying the theorem, we obtain a parameterization of $C$ in terms of semi-algebraic functions
+First notice that, for all $i \in \{1,\hdots,n\},$ since $\crit(\pi_i,C) = \emptyset$ and $\pi_i(C) \not = \R$, $\pi_i(C)$ is an open interval:
 \[
-C = \big\{(t,g_2(t),\hdots,g_n(t))~|~ t \in \R\big\}
+\pi_i(C)=
+\begin{cases}
+			(e_i,+\infty), \\
+                (-\infty,e_i),\textrm{ or }\\
+                (e_i,e_i').
+\end{cases}
+\]
+Now let $U$ denote $(e_1,+\infty)$ and take $\eta \in U.$ A Nash version of Ehresmann's fibration theorem \cite[Th. 2.4 and 3.1]{Shiota1992} can be given in terms of Nash functions, $\C^{\infty}$ semi-algebraic functions (see Figure \ref{fig:Ehresmann} for a visual representation). As a consequence of applying the theorem, we obtain a parameterization of $C$ in terms of semi-algebraic functions
+\[
+\big\{(t,g_2(t),\hdots,g_n(t))~|~ t \in U\big\} \subset C
 \]
 The semi-algebraic functions $g_2(t),\hdots,g_n(t)$ are diffeomorphisms, and the tangent vector for $t \in \R$ is given by 
 \[
@@ -320,49 +266,38 @@ Since by assumption,
 \[
 C \cap \crit(\pi_i,V) = \emptyset, \forall i \in \{1,\hdots,n\},
 \]
-$g_2,\hdots,g_n$ therefore never vanish are are therefore monotonic. Now, consider the set 
+$g_2',\hdots,g_n'$ never vanish and therefore $g_2,\hdots,g_n$ are monotonic. Now, consider the set 
 \[
 N_1 = \big\{i~|~g_i(t) \rightarrow \infty \textrm{ as } t \rightarrow e_1, \textrm{ and } g_i(t) \not \rightarrow \infty \textrm{ as } t \rightarrow \infty\big\},
 \]
-and notice that when $N_1 \not = \emptyset$ then $x_1 \pm x_i=0$ meets the connected component $C$, proving Proposition \ref{prop:main} for the $d=1$ case.  Now, since $g_2,\hdots,g_n$ are monotonic, it must be that $N_1$ is not empty. Indeed, firstly, there exists an $i$ with $g_i(t) \rightarrow \infty$ as $t \rightarrow e_1$ because $e_1$ is the boundary point of the projection on the $x_1$ axis. WLOG assume $i=2.$ Now, since $g_2(t)$ is monotonic, as $t$ ranges from $e_1$ to $+\infty, g_2(t)$ is decreasing and thus $g_2(t)$ is monotonically decreasing. We cannot have that $g_2(t)$ tends to $-\infty$ because then as $t$ tends from $e_1$ to $+\infty$, $g_2(t)$ would cover the entire real line which we have assumed is not the case. Therefore, $g_2(t) \rightarrow e_2$ as $t$ tends from $e_1$ to $+\infty$.
+and notice that when $N_1 \not = \emptyset$ then $x_1 \pm x_i=0$ meets the connected component $C$, proving Proposition \ref{prop:main} for the $d=1$ case.  And indeed, since $g_2,\hdots,g_n$ are monotonic, it must be that $N_1$ is not empty. \color{red}Firstly, there exists an $i$ with $g_i(t) \rightarrow \infty$ as $t \rightarrow e_1$ because $e_1$ is the boundary point of $\pi_1(C)$ (needs justification?)\color{black}. WLOG assume $i=2.$ Now, since $g_2(t)$ is monotonic, as $t$ ranges from $e_1$ to $+\infty, g_2(t)$ is decreasing and thus $g_2(t)$ is monotonically decreasing. We cannot have that $g_2(t)$ tends to $-\infty$ because then as $t$ tends from $e_1$ to $+\infty$, $g_2(t)$ would cover the entire real line which we have assumed is not the case. Therefore, $g_2(t) \rightarrow e_2$ as $t$ tends from $e_1$ to $+\infty$.
 \end{proof}
 %
-\begin{lemma}
-    
-\end{lemma}
-\begin{proof}
-Let $\mathscr{D} = \bd(\vp_2(C))$, let 
-\[
-T_{\epsilon}\mathscr{D} = \left\{\alpha \in \R\langle \epsilon \rangle^2~|~dist(\alpha,\mathscr{D}) \leq \epsilon \right\} 
-\]
-and let $(\zeta_l)_{l \in \N} \subset C$ be a sequence with 
-\[
-\zeta_l \in \pi_1^{-1}\left(e_1 + 1/l \right) \cap \vp_2^{-1}\left(T_{\epsilon}\mathscr{D}\right) \cap C \not = \emptyset~\td.
-\]
-By construction, $\pi_1(\zeta_l) \rightarrow e_1$. Now, 
-\[
-\pi_2(\vp_2(\zeta_l)) \rightarrow ?
-\]
-\td
-\end{proof}
+%\begin{lemma}
+%    \td
+%\end{lemma}
+%\begin{proof}
+%Let $\mathscr{D} = \bd(\vp_2(C))$, let 
+%\[
+%T_{\epsilon}\mathscr{D} = \left\{\alpha \in \R\langle \epsilon \rangle^2~|~dist(\alpha,\mathscr{D}) \leq \epsilon \right\} 
+%\]
+%and let $(\zeta_l)_{l \in \N} \subset C$ be a sequence with 
+%\[
+%\zeta_l \in \pi_1^{-1}\left(e_1 + 1/l \right) \cap \vp_2^{-1}\left(T_{\epsilon}\mathscr{D}\right) \cap C \not = \emptyset~\td.
+%\]
+%By construction, $\pi_1(\zeta_l) \rightarrow e_1$. Now, 
+%\[
+%\pi_2(\vp_2(\zeta_l)) \rightarrow ?
+%\]
+%\td
+%\end{proof}
 %
-\paragraph*{Comments:}
-\begin{itemize}
-    \item[--] Insight to generalize to the $d$-dimensional case? 
-    \item[--] It (the proof) tells us that we can read everything on some projection of dimension $d+1$.
-    \item[--] Gives a new ingredient: we can get the information by looking at the projections on spaces of dimension $d+1.$ 
-    \item[--] Our claim (in dimension 1) is basically that there is a 1 dimensional coordinate space such that the projection on the 1 dimensional coordinate space is unbounded.... could we prove (the following lemma)?
-\end{itemize}
 
 
+%\begin{lemma}
+%    Where $d = \dim (C),$ there exists $\{i_1,\hdots,i_d\} \subset \{1,\hdots,n\}$ with $\pi_j(C)$ unbounded for all $j \in \{i_1,\hdots,i_d\}.$
+%\end{lemma}
 
-\begin{lemma}
-    Where $d = \dim (C),$ there exists $\{i_1,\hdots,i_d\} \subset \{1,\hdots,n\}$ with $\pi_j(C)$ unbounded for all $j \in \{i_1,\hdots,i_d\}.$
-\end{lemma}
-
-\begin{proof}
-    
-\end{proof}
 
 \subsection*{Assume the dimension of $C$ is $d\geq 1$}
 \begin{proof}
@@ -372,9 +307,111 @@ By construction, $\pi_1(\zeta_l) \rightarrow e_1$. Now,
 
 
 
-
+\newpage 
 \bibliographystyle{plain}
 \bibliography{references.bib}
+\newpage 
+
+
+
+
+
+
+
+\appendix
+
+\section{Alternative arguments for Proposition \ref{prop:main}}
+
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assume the dimension of $C$ is $1$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection*{First argument}
+Since $\pi_1(C) \not = \R$ and since $C \not = \emptyset$, there exists 
+\[
+a \in \bd(\pi_1(C)) = \overline{\pi_1(C)} - \vp_{1}^o(C).
+\]
+Since $C \cap \crit(\pi_1,V) = \emptyset, a \not \in \pi_1(C).$ Therefore we can take a sequence $(\alpha_l)_{l \in \N} \subset C,$ with $\pi_1(\alpha_l) \rightarrow a$ as $l \rightarrow \pm\infty$; WLOG assume $l \rightarrow +\infty.$ Then, $||\alpha_l|| \rightarrow \infty$ as $l \rightarrow \infty.$ Now, there exists an $i \in \{1,\hdots,n\}$ with $\pi_i(\alpha_l) - \pi_1(\alpha_1) \rightarrow \infty$ as $l \rightarrow \infty.$ 
+\par 
+Similarly, there exists 
+\[
+b \in \bd(\pi_i(C)) = \overline{\pi_i(C)} - \pi_i^o(C), b \not \in \pi_i(C).
+\]
+And therefore a sequence $(\beta_k)_{k \in \N} \subset C$ exists with $\pi_i(\beta_k) \rightarrow b$ and $|| \beta_k|| \rightarrow \infty$ as $k \rightarrow \infty.$ Therefor  $j \in \{1,\hdots,n\}-\{i\}$ exists with 
+\[
+\pi_j(\beta_k) - \pi_i(\beta_k) \rightarrow \infty
+\]
+\color{red}
+Can we show that 
+\[
+\pi_1(\beta_k) \rightarrow \infty?
+\]
+\color{black}
+If $n=2$ then since $i \not = 1$, it must be that $i=2$ and $j=1$ so that  $\pi_1(\beta_k) - \pi_2(\beta_k) \rightarrow \infty$ and $\pi_1(\beta_k) \rightarrow \infty.$ And therefore we have a sign change with $x_1-x_2=0$ over the connected component $C$. 
+\par 
+Let 
+\[
+N = \big\{i \in \{1,\hdots,n\} ~|~ \psi_i(C) \textrm{ is closed}\big\}. 
+\]
+\begin{enumerate}
+    \item $N = \emptyset:$ 
+    \par 
+    Since $N$ is empty, $\vp_{n-1}(C)$ is not closed. It follows that $\dim(\vp_{n-1}(C))=1$ because, otherwise, since $C$ is non-empty  and since dimension can only decrease after projection, $\dim(\vp_{n-1}(C))=0$ implying that $\vp_{n-1}(C)$ is closed, a contradiction \lightning. Therefore, $\alpha \in \R^{n-1}$ exists \why with 
+    \[
+    \alpha \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C),~ \alpha \not \in \vp_{n-1}(C).
+    \]
+    In other words, $\alpha$ lies in the set of non-properness of $\vp_{n-1}|_C$. And therefore, a sequence $(\zeta_l)_{l \in \N} \subset C$ exists with $\vp_{n-1}(\zeta_l) \rightarrow \alpha$ and $\pi_n(\zeta_l) \rightarrow \infty.$ And, since, by assumption, 
+\[
+    C \cap \crit(\pi_n,V) = \emptyset \textrm{ and  } \pi_n(C) \not = \R,
+\]
+the projection $\pi_n(C)$ cannot be a bounded and open interval:
+\[
+\pi_n(C) = (e_n,+\infty) \textrm{ or } \pi_n(C) = (-\infty,e_n). 
+\]
+Now let $(\beta_l)_{l \in \N} \subset C$ with $\pi_n(\beta_l) \rightarrow e_n$. Then, since $\pi_n(C)$ is an open interval with boundary point $e_n$, there exists $i \in \{1,\hdots,n-1\}$ with $\pi_i(\beta_l) \rightarrow \infty$ and, again since \[
+    C \cap \crit(\pi_i,V) = \emptyset \textrm{ and  } \pi_i(C) \not = \R
+\]
+and $\pi_i(\beta_l) \rightarrow \infty$,
+\[
+\pi_i(C) = (e_i,+\infty) \textrm{ or } \pi_i(C) = (-\infty,e_i). 
+\]
+Now pick a sequence of points in $C$ who's $i$-th projection converges to $e_i:$ 
+\[
+(\gamma_l)_{l \in \N} \subset C,~ \pi_i(\gamma_l) \rightarrow e_i.
+\]
+It then follows that $\vp_{n-1}(\gamma_l) \rightarrow \alpha$. Indeed, since $\pi_i(\gamma_l) \rightarrow e_i$, it must be that 
+\[
+e_i \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C).
+\]
+To $l$ associate 
+\[
+l \mapsto \vp_{n-1}(C) \cap B(\alpha,1/l)~(\textrm{ball with center }\alpha \textrm{ and radius } 1/l).
+\]
+For $l$ large enough, the intersection is not empty and
+%; when you find one point there, lift it and define $(\gamma_l)$ this way. 
+\[
+e_i =\pi_i\circ \vp_{n-1}(\alpha).
+\]
+We then have that $C$ will either intersect $x_n-x_i$ or $C$ will intersect $x_n+x_i$. By continuity, because $C$ is connected $x_i - x_n$ or $x_i+x_n$ has a sign change over the connected component $C$. 
+%
+\item $N \not = \emptyset:$
+\par 
+Mimic the same reasoning over $\psi_i(C)$. Replace $C$ with $\psi_i(C)$ and WLOG assume that $i$ is $n$ so we work in dimension $n-1$ with a closed semi-algebraic curve in $\R^{n-1}$. By an injection argument, we end up with the $n=2$ case (an inductive argument can be made with with having $n=2$ as the base case - \td).  
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assume the dimension of $C$ is $d\geq 1$}
+\td 
+
+
+
+
 
 
 
