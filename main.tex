@@ -18,6 +18,7 @@
 \usepackage{wasysym}
 \usepackage{xargs}
 \usepackage[symbol]{footmisc}
+\usepackage[shadow,textsize=tiny,tickmarkheight=4pt]{todonotes}
 
 % HURL
 \usepackage{hyperref}
@@ -63,7 +64,7 @@
 \newcommand{\Id}{\mathcal{O}}
 
 % other shortcuts 
-\newcommand\todo[1]{(\textcolor{red}{{\bf todo}}: #1)}
+\newcommand\mytodo[1]{(\textcolor{red}{{\bf todo}}: #1)}
 \def\td{(\textcolor{red}{{\bf todo}})}
 \newcommand\done[1]{- \textcolor{red}{{\bf done}} #1}
 \def\done{(\textcolor{red}{{\bf done}})}
@@ -106,6 +107,7 @@
 
 \date{}
 
+\def\ms#1{\textcolor{olive}{#1}}
 \begin{document}
 
 \maketitle
@@ -233,11 +235,14 @@ First notice that, for all $i \in \{1,\hdots,n\},$ since $\crit(\pi_i,C) = \empt
                 (e_i,e_i').
 \end{cases}
 \]
-Now let $U$ denote $(e_1,+\infty)$ and take $\eta \in U.$ A Nash version of Ehresmann's fibration theorem \cite[Th. 2.4 and 3.1]{Shiota1992} can be given in terms of Nash functions, $\C^{\infty}$ semi-algebraic functions (see Figure \ref{fig:Ehresmann} for a visual representation). As a consequence of applying the theorem, we obtain a parameterization of $C$ in terms of semi-algebraic functions
+Now let $U$ denote $(e_1,+\infty)$ and take $\eta \in U.$ A Nash version of
+Ehresmann's fibration theorem \cite[Th. 2.4 and 3.1]{Shiota1992} can be given in
+terms of Nash functions, $\C^{\infty}$\todo{change notation $\mathcal{C}^\infty$} semi-algebraic functions (see Figure \ref{fig:Ehresmann} for a visual representation). As a consequence of applying the theorem, we obtain a parameterization of $C$ in terms of semi-algebraic functions
 \[
-\big\{(t,g_2(t),\hdots,g_n(t))~|~ t \in U\big\} \subset C
+\big\{\vartheta(t) = (t,g_2(t),\hdots,g_n(t))~|~ t \in U\big\} \subset C
 \]
-The semi-algebraic functions $g_2(t),\hdots,g_n(t)$ are diffeomorphisms, and the tangent vector for $t \in \R$ is given by 
+The semi-algebraic functions $g_2(t),\hdots,g_n(t)$ are diffeomorphisms, and the
+tangent vector \ms{at $C$ to $\vartheta(t)$} is given by 
 \[
 \begin{pmatrix}
     1 \\
@@ -246,7 +251,8 @@ The semi-algebraic functions $g_2(t),\hdots,g_n(t)$ are diffeomorphisms, and the
     g'_n(t)\\
 \end{pmatrix}.
 \]
-The tangent vector at a critical point would give
+The tangent vector at a critical point\todo{Not so clear; I believe there is a
+  mistake. Only one partial derivative cancels.} would give
 \[
 \begin{pmatrix}
     1 \\
@@ -270,7 +276,20 @@ $g_2',\hdots,g_n'$ never vanish and therefore $g_2,\hdots,g_n$ are monotonic. No
 \[
 N_1 = \big\{i~|~g_i(t) \rightarrow \infty \textrm{ as } t \rightarrow e_1, \textrm{ and } g_i(t) \not \rightarrow \infty \textrm{ as } t \rightarrow \infty\big\},
 \]
-and notice that when $N_1 \not = \emptyset$ then $x_1 \pm x_i=0$ meets the connected component $C$, proving Proposition \ref{prop:main} for the $d=1$ case.  And indeed, since $g_2,\hdots,g_n$ are monotonic, it must be that $N_1$ is not empty. \color{red}Firstly, there exists an $i$ with $g_i(t) \rightarrow \infty$ as $t \rightarrow e_1$ because $e_1$ is the boundary point of $\pi_1(C)$ (needs justification?)\color{black}. WLOG assume $i=2.$ Now, since $g_2(t)$ is monotonic, as $t$ ranges from $e_1$ to $+\infty, g_2(t)$ is decreasing and thus $g_2(t)$ is monotonically decreasing. We cannot have that $g_2(t)$ tends to $-\infty$ because then as $t$ tends from $e_1$ to $+\infty$, $g_2(t)$ would cover the entire real line which we have assumed is not the case. Therefore, $g_2(t) \rightarrow e_2$ as $t$ tends from $e_1$ to $+\infty$.
+and notice that when $N_1 \not = \emptyset$ then $x_1 \pm x_i=0$ meets the
+connected component $C$\todo{We should make this super precise I guess.},
+proving Proposition \ref{prop:main} for the $d=1$ case. And indeed, since
+$g_2,\hdots,g_n$ are monotonic, it must be that $N_1$ is not empty.
+\color{red}Firstly, there exists an $i$ with $g_i(t) \rightarrow \infty$ as $t
+\rightarrow e_1$ because $e_1$ is the boundary point of $\pi_1(C)$ (needs
+justification?)\color{black} \ms{Yes. The idea is to say that, if for some $i$
+  $\pi_i(\vartheta(t))$ tends to $\infty$ when $t\to 1$, then $i\in N_1$ because
+  $g_i$ is monotone (and $\pi_i(C)\neq \R$)}. WLOG assume $i=2.$ Now, since
+$g_2(t)$ is monotonic, as $t$ ranges from $e_1$ to $+\infty, g_2(t)$ is
+decreasing and thus $g_2(t)$ is monotonically decreasing. We cannot have that
+$g_2(t)$ tends to $-\infty$ because then as $t$ tends from $e_1$ to $+\infty$,
+$g_2(t)$ would cover the entire real line which we have assumed is not the case.
+Therefore, $g_2(t) \rightarrow e_2$ as $t$ tends from $e_1$ to $+\infty$.
 \end{proof}
 %
 %\begin{lemma}
@@ -413,7 +432,28 @@ Mimic the same reasoning over $\psi_i(C)$. Replace $C$ with $\psi_i(C)$ and WLOG
 
 
 
+\ms{We can try to extend the reasoning this way. We consider the projection on
+  the $(x_1, \ldots, x_d)$-space. Using again something like the semi-algebraic
+  implicit function theorem, we should be able to parameterize all coordinates
+  points in $C$ with $d$-variate continuous semi-algebraic functions $g_{d+1},
+  \ldots, g_n$ (provided that $C$ does not intersect the polar variety
+  associated to the projection on this $(x_1, \ldots, x_d)$-space). Since $C$ is
+  assumed to be smooth, these $g_i$'s should be diffeomorphisms.}
 
+\ms{Now we take $\alpha$ in the boundary of the projection $\pi(C)$ of $C$ on
+  the $(x_1, \ldots, x_d)$-space. Assuming additionally that this projection
+  does not cover $\R^d$ such a point exists. We can now consider a
+  semi-algebraic path $\gamma:(0, 1]\to \pi(C)$ such that $t\mapsto \gamma(t)$
+  can be extended continuously to $0$ with $\gamma(0)=\alpha$. }
 
+\ms{My hope is now that $g_i\circ \gamma$ is monotone (or at least that we can
+  choose $\alpha$ and $\gamma$ this way ; if $\alpha$ is a ``regular'' point of
+  the boundary, we could take $\gamma$ as a segment). It should be ok also to
+  show that $\pi^{-1}(\gamma)\cap C$ is $1$-dimensional. }
+
+\ms{What remains then to be done is to show that the fact that $C$ does not meet
+any polar variety associated to projections on $d$-dimensional coordinate
+subspaces will ``transfer'' to $C\cap \pi^{-1}(\gamma)$ the properties needed to
+apply the result above (in the case $d = 1$).}
 
 \end{document}
