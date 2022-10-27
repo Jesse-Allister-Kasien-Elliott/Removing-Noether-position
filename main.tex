@@ -1,8 +1,9 @@
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 % packages
 \usepackage[left=1.87cm,right=1.87cm,top=1.87cm,bottom=1.87cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{mathrsfs}
+\usepackage{bm}
 \usepackage{multirow}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -100,7 +101,7 @@
 
 
 
-\title{A deterministic algorithm for computing one point in each connected component of a smooth real algebraic set}
+\title{A las vegas algorithm for computing one point in each connected component of a smooth real algebraic set}
 \author{Jesse Elliott\thanks{David R. Cheriton School of Computer Science, University of Waterloo, On, Canada}, Mohab Safey El Din\thanks{Sorbonne Universit\'e, CNRS, INRIA, Laboratoire d’Informatique de Paris 6, PolSys, Paris, France}, \'Eric Schost \thanks{David R. Cheriton School of Computer Science, University of Waterloo, On, Canada} 
 }
 
@@ -117,116 +118,84 @@
 
 \begin{abstract}
 This is an abstract \newline
-\keywords{Real algebraic geometry, polynomial system solving, complexity}
+\keywords{Real algebraic geometry, polynomial system solving, algorithms}
 \end{abstract}
 
 
-\newpage 
 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Removing the Noether position requirement}
-For $i$ in
-$\{1,\dots,n\},$ consider the projections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preliminaries and notation}
+For $i$ in $\{1,\dots,n\}$ and $\{i_1,\hdots,i_d\} \subset \{1,\dots,n\},$ consider the projections
+%
 \begin{align*}
     \vp_i: \C^n  &\rightarrow \C^i \\
     (x_1,\hdots,x_n) &\mapsto  (x_1,\hdots,x_i)    
 \end{align*}
+%
+%
 \begin{align*}
     \psi_i: \C^n  &\rightarrow \C^{n-1} \\
-    (x_1,\hdots,x_n) &\mapsto  (x_1,\hdots,x_{i-1},x_{i+1},\hdots,x_n)    
+    (x_1,\hdots,x_n) &\mapsto  (x_1,\hdots,x_{i-1},x_{i+1},\hdots,x_n),    
 \end{align*}
+%
 \begin{align*}
-    \pi_i: \C^n  &\rightarrow \C \\
-    (x_1,\hdots,x_n) &\mapsto x_i.
+    \pi_{i_1,\hdots,i_d}: \C^n  &\rightarrow \C^d \\
+    (x_1,\hdots,x_n) &\mapsto  (x_{i_1},\hdots,x_{i_d}).    
 \end{align*}
+%
+For a variety $V \subset \C^n$, consider critical points $\crit(\pi_{i_1,\hdots,i_d},V) = \big\{\bm x \in V~|~\dim \left(\pi_{i_1,\hdots,i_d}\left(T_{\bm x} \right) \right) < d \big\}$ where $T_{\bm x}(V)$ is the Zariski tangent space at $\bm x \in V$.
+%
+%
+\begin{definition}
+Let $S \subset \R^n$ be a real algebraic set. The \textit{dimension} of $S$ is the largest integer $d$ with the property that, for any $\{i_1,\hdots,i_d\} \subset \{1,\dots,n\}, \pi_{i_1,\hdots,i_d}(S)$ contains an open subset of $\R^d$.     
+\end{definition}
+%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Removing the Noether position requirement}
+In this section we prove the following proposition. 
 %
 \begin{proposition}\label{prop:main}
-    Let $V \subset \C^n$ be a smooth affine variety and let $C$ be a connected component of $V \cap \R^n$ with dimension $d$. If, for all $i \in \{1,\hdots,n\}, C \cap \crit(\pi_i,V) = \emptyset$  and  $\pi_i(C) \not = \R$, then there exists distinct $i,j \in\{1,\hdots,n\}$ with
-    \[
-C \cap \{ x_i= x_j\} \not = \emptyset \textrm{ or }
-C \cap \{ x_i= -x_j\} \not = \emptyset. 
-    \]
+Let $V \subset \C^n$ be a smooth variety and let $C$ be a connected component of $V \cap \R^n$ with dimension $d$. If, for all $\{i_1,\hdots,i_d\} \subset \{1,\dots,n\}$, 
+\begin{enumerate}
+    \item $C \cap \crit(\pi_{i_1,\hdots,i_d},V) = \emptyset$;
+    \item $\pi_{i_1,\hdots,i_d}(C) \not = \R^d;$
+\end{enumerate}
+then there exists distinct $i,j \in\{1,\hdots,n\}$ with $C \cap \{ x_i= x_j\} \not = \emptyset$ or 
+$C \cap \{ x_i= -x_j\} \not = \emptyset.$
 \end{proposition}
 %
-\begin{lemma}
-    There exists $i \in \{1,\hdots,n\}$ with $\pi_i(C)$ not bounded. WLOG assume $i=1.$
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dimension $1$ case}
+For $d=1$, we assume that for all $i \in \{1,\hdots,n\},$ 
+%
+\begin{enumerate}
+    \item $C \cap \crit(\pi_i,V) = \emptyset$;
+    \item $\pi_i(C) \not = \R$.
+\end{enumerate}
+%
+%
+\begin{lemma}\label{lemma:unboundedCoordinate}
+    There exists $i \in \{1,\hdots,n\}$ with $\pi_i(C)$ not bounded. (WLOG assume $i=1.$)
 \end{lemma}
+%
+%
 \begin{proof}
-    \td
+Assume for contradiction that $\pi_i(C)$ is bounded for all $i \in \{1,\hdots,n\}$, and let $\pi_i(C) = (e_i,e_i').$
+Notice that $C$ is therefore closed and bounded, and therefore compact. It follows that $\pi_i(C)=(e_i,e_i')$ are all compact, which is a contradiction.
 \end{proof}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Assume the dimension of $C$ is $1$}
 %
-%
-\begin{figure}[!h]
-    \centering
-    
-
-\begin{tikzpicture}
-
-%%    NODES   %%
-\node (20) at (-4,3) {$\pi_1^{-1}(U) \cap C$};
-\node (21) at (0,3) {$\pi_1^{-1}(\eta) \times U$};
-\node (100) at (0,1.5) {$U$};
-\node (Order2) at (-2,3.2) {$f$};
-
-%%    ARROWS    %%
-\draw [->] (20) -- (100);
-\draw [->] (21) -- (100);
-\draw [->] (20) -- (21);
-
-\end{tikzpicture}
-    \caption{(Finish diagram \td) A Nash version of Ehresmann's fibration theorem.}
-    \label{fig:Ehresmann}
-\end{figure}
-%
-%
-\begin{proof}
-First notice that, for all $i \in \{1,\hdots,n\},$ since $\crit(\pi_i,C) = \emptyset$ and $\pi_i(C) \not = \R$, $\pi_i(C)$ is an open interval:
+\noindent
+Now, notice that, for all $i \in \{1,\hdots,n\},$ since $\crit(\pi_i,C) = \emptyset$ and $\pi_i(C) \not = \R$, $\pi_i(C)$ is an open interval:
 \[
 \pi_i(C)=
 \begin{cases}
@@ -235,209 +204,149 @@ First notice that, for all $i \in \{1,\hdots,n\},$ since $\crit(\pi_i,C) = \empt
                 (e_i,e_i').
 \end{cases}
 \]
-Now let $U$ denote $(e_1,+\infty)$ and take $\eta \in U.$ A Nash version of
-Ehresmann's fibration theorem \cite[Th. 2.4 and 3.1]{Shiota1992} can be given in
-terms of Nash functions, $\C^{\infty}$\todo{change notation $\mathcal{C}^\infty$} semi-algebraic functions (see Figure \ref{fig:Ehresmann} for a visual representation). As a consequence of applying the theorem, we obtain a parameterization of $C$ in terms of semi-algebraic functions
+By the semi-algebraic implicit function theorem, we can obtain a parameterization
 \[
-\big\{\vartheta(t) = (t,g_2(t),\hdots,g_n(t))~|~ t \in U\big\} \subset C
+\big\{\vartheta(t) = \left(t,g_2(t),\hdots,g_n(t)\right)~|~ t \in (e_1,+\infty)\big\} \subset C.
 \]
-The semi-algebraic functions $g_2(t),\hdots,g_n(t)$ are diffeomorphisms, and the
-tangent vector \ms{at $C$ to $\vartheta(t)$} is given by 
-\[
-\begin{pmatrix}
-    1 \\
-    g'_2(t)\\
-    \vdots\\
-    g'_n(t)\\
-\end{pmatrix}.
-\]
-The tangent vector at a critical point\todo{Not so clear; I believe there is a
-  mistake. Only one partial derivative cancels.} would give
-\[
-\begin{pmatrix}
-    1 \\
-    g'_2(t)\\
-    \vdots\\
-    g'_n(t)\\
-\end{pmatrix}
-=
-\begin{pmatrix}
-    1 \\
-    0\\
-    \vdots\\
-    0\\
-\end{pmatrix}.
-\]
-Since by assumption, 
-\[
-C \cap \crit(\pi_i,V) = \emptyset, \forall i \in \{1,\hdots,n\},
-\]
-$g_2',\hdots,g_n'$ never vanish and therefore $g_2,\hdots,g_n$ are monotonic. Now, consider the set 
-\[
-N_1 = \big\{i~|~g_i(t) \rightarrow \infty \textrm{ as } t \rightarrow e_1, \textrm{ and } g_i(t) \not \rightarrow \infty \textrm{ as } t \rightarrow \infty\big\},
-\]
-and notice that when $N_1 \not = \emptyset$ then $x_1 \pm x_i=0$ meets the
-connected component $C$\todo{We should make this super precise I guess.},
-proving Proposition \ref{prop:main} for the $d=1$ case. And indeed, since
-$g_2,\hdots,g_n$ are monotonic, it must be that $N_1$ is not empty.
-\color{red}Firstly, there exists an $i$ with $g_i(t) \rightarrow \infty$ as $t
-\rightarrow e_1$ because $e_1$ is the boundary point of $\pi_1(C)$ (needs
-justification?)\color{black} \ms{Yes. The idea is to say that, if for some $i$
-  $\pi_i(\vartheta(t))$ tends to $\infty$ when $t\to 1$, then $i\in N_1$ because
-  $g_i$ is monotone (and $\pi_i(C)\neq \R$)}. WLOG assume $i=2.$ Now, since
-$g_2(t)$ is monotonic, as $t$ ranges from $e_1$ to $+\infty, g_2(t)$ is
-decreasing and thus $g_2(t)$ is monotonically decreasing. We cannot have that
-$g_2(t)$ tends to $-\infty$ because then as $t$ tends from $e_1$ to $+\infty$,
-$g_2(t)$ would cover the entire real line which we have assumed is not the case.
-Therefore, $g_2(t) \rightarrow e_2$ as $t$ tends from $e_1$ to $+\infty$.
-\end{proof}
+where $g_2(t),\hdots,g_n(t)$ are semi-algebraic functions. Furthermore, since $C$ is smooth, $g_2(t),\hdots,g_n(t)$ are diffeomorphisms.
 %
-%\begin{lemma}
-%    \td
-%\end{lemma}
-%\begin{proof}
-%Let $\mathscr{D} = \bd(\vp_2(C))$, let 
-%\[
-%T_{\epsilon}\mathscr{D} = \left\{\alpha \in \R\langle \epsilon \rangle^2~|~dist(\alpha,\mathscr{D}) \leq \epsilon \right\} 
-%\]
-%and let $(\zeta_l)_{l \in \N} \subset C$ be a sequence with 
-%\[
-%\zeta_l \in \pi_1^{-1}\left(e_1 + 1/l \right) \cap \vp_2^{-1}\left(T_{\epsilon}\mathscr{D}\right) \cap C \not = \emptyset~\td.
-%\]
-%By construction, $\pi_1(\zeta_l) \rightarrow e_1$. Now, 
-%\[
-%\pi_2(\vp_2(\zeta_l)) \rightarrow ?
-%\]
-%\td
-%\end{proof}
+\begin{lemma}
+The functions $g_2(t),\hdots,g_n(t)$ are monotonic. 
+\end{lemma}
 %
-
-
-%\begin{lemma}
-%    Where $d = \dim (C),$ there exists $\{i_1,\hdots,i_d\} \subset \{1,\hdots,n\}$ with $\pi_j(C)$ unbounded for all $j \in \{i_1,\hdots,i_d\}.$
-%\end{lemma}
-
-
-\subsection*{Assume the dimension of $C$ is $d\geq 1$}
+%
 \begin{proof}
-\td
+Consider the tangent vector to $\vartheta(t)$,
+at $C$, at a point in $\crit(\pi_i,V)$; it would give $
+\begin{pmatrix}
+    1, 
+    g'_2(t), 
+    \hdots, 
+    g'_n(t)
+\end{pmatrix},
+$ with
+%\todo{Not so clear; I believe there is a mistake. Only one partial derivative cancels.} 
+$g'_i(t)=0.$ Therefore, since by assumption $C \cap \crit(\pi_i,V) = \emptyset$ for all $i \in \{1,\hdots,n\}$,
+$g_2',\hdots,g_n'$ never vanish. It follows that $g_2',\hdots,g_n'$ are  monotonic.
 \end{proof}
-
-
-
-
-\newpage 
-\bibliographystyle{plain}
-\bibliography{references.bib}
-\newpage 
-
-
-
-
-
-
-
-\appendix
-
-\section{Alternative arguments for Proposition \ref{prop:main}}
-
-
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Assume the dimension of $C$ is $1$}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\subsection*{First argument}
-Since $\pi_1(C) \not = \R$ and since $C \not = \emptyset$, there exists 
-\[
-a \in \bd(\pi_1(C)) = \overline{\pi_1(C)} - \vp_{1}^o(C).
-\]
-Since $C \cap \crit(\pi_1,V) = \emptyset, a \not \in \pi_1(C).$ Therefore we can take a sequence $(\alpha_l)_{l \in \N} \subset C,$ with $\pi_1(\alpha_l) \rightarrow a$ as $l \rightarrow \pm\infty$; WLOG assume $l \rightarrow +\infty.$ Then, $||\alpha_l|| \rightarrow \infty$ as $l \rightarrow \infty.$ Now, there exists an $i \in \{1,\hdots,n\}$ with $\pi_i(\alpha_l) - \pi_1(\alpha_1) \rightarrow \infty$ as $l \rightarrow \infty.$ 
-\par 
-Similarly, there exists 
-\[
-b \in \bd(\pi_i(C)) = \overline{\pi_i(C)} - \pi_i^o(C), b \not \in \pi_i(C).
-\]
-And therefore a sequence $(\beta_k)_{k \in \N} \subset C$ exists with $\pi_i(\beta_k) \rightarrow b$ and $|| \beta_k|| \rightarrow \infty$ as $k \rightarrow \infty.$ Therefor  $j \in \{1,\hdots,n\}-\{i\}$ exists with 
-\[
-\pi_j(\beta_k) - \pi_i(\beta_k) \rightarrow \infty
-\]
-\color{red}
-Can we show that 
-\[
-\pi_1(\beta_k) \rightarrow \infty?
-\]
-\color{black}
-If $n=2$ then since $i \not = 1$, it must be that $i=2$ and $j=1$ so that  $\pi_1(\beta_k) - \pi_2(\beta_k) \rightarrow \infty$ and $\pi_1(\beta_k) \rightarrow \infty.$ And therefore we have a sign change with $x_1-x_2=0$ over the connected component $C$. 
-\par 
-Let 
-\[
-N = \big\{i \in \{1,\hdots,n\} ~|~ \psi_i(C) \textrm{ is closed}\big\}. 
-\]
-\begin{enumerate}
-    \item $N = \emptyset:$ 
-    \par 
-    Since $N$ is empty, $\vp_{n-1}(C)$ is not closed. It follows that $\dim(\vp_{n-1}(C))=1$ because, otherwise, since $C$ is non-empty  and since dimension can only decrease after projection, $\dim(\vp_{n-1}(C))=0$ implying that $\vp_{n-1}(C)$ is closed, a contradiction \lightning. Therefore, $\alpha \in \R^{n-1}$ exists \why with 
-    \[
-    \alpha \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C),~ \alpha \not \in \vp_{n-1}(C).
-    \]
-    In other words, $\alpha$ lies in the set of non-properness of $\vp_{n-1}|_C$. And therefore, a sequence $(\zeta_l)_{l \in \N} \subset C$ exists with $\vp_{n-1}(\zeta_l) \rightarrow \alpha$ and $\pi_n(\zeta_l) \rightarrow \infty.$ And, since, by assumption, 
-\[
-    C \cap \crit(\pi_n,V) = \emptyset \textrm{ and  } \pi_n(C) \not = \R,
-\]
-the projection $\pi_n(C)$ cannot be a bounded and open interval:
-\[
-\pi_n(C) = (e_n,+\infty) \textrm{ or } \pi_n(C) = (-\infty,e_n). 
-\]
-Now let $(\beta_l)_{l \in \N} \subset C$ with $\pi_n(\beta_l) \rightarrow e_n$. Then, since $\pi_n(C)$ is an open interval with boundary point $e_n$, there exists $i \in \{1,\hdots,n-1\}$ with $\pi_i(\beta_l) \rightarrow \infty$ and, again since \[
-    C \cap \crit(\pi_i,V) = \emptyset \textrm{ and  } \pi_i(C) \not = \R
-\]
-and $\pi_i(\beta_l) \rightarrow \infty$,
-\[
-\pi_i(C) = (e_i,+\infty) \textrm{ or } \pi_i(C) = (-\infty,e_i). 
-\]
-Now pick a sequence of points in $C$ who's $i$-th projection converges to $e_i:$ 
-\[
-(\gamma_l)_{l \in \N} \subset C,~ \pi_i(\gamma_l) \rightarrow e_i.
-\]
-It then follows that $\vp_{n-1}(\gamma_l) \rightarrow \alpha$. Indeed, since $\pi_i(\gamma_l) \rightarrow e_i$, it must be that 
-\[
-e_i \in \bd(\vp_{n-1}(C)) = \overline{\vp_{n-1}(C)} - \vp_{n-1}^o(C).
-\]
-To $l$ associate 
-\[
-l \mapsto \vp_{n-1}(C) \cap B(\alpha,1/l)~(\textrm{ball with center }\alpha \textrm{ and radius } 1/l).
-\]
-For $l$ large enough, the intersection is not empty and
-%; when you find one point there, lift it and define $(\gamma_l)$ this way. 
-\[
-e_i =\pi_i\circ \vp_{n-1}(\alpha).
-\]
-We then have that $C$ will either intersect $x_n-x_i$ or $C$ will intersect $x_n+x_i$. By continuity, because $C$ is connected $x_i - x_n$ or $x_i+x_n$ has a sign change over the connected component $C$. 
+\noindent
+Now, consider the set $N_1 = \big\{i~|~g_i(t) \rightarrow \infty \textrm{ as } t \rightarrow e_1, \textrm{ and } g_i(t) \not \rightarrow \infty \textrm{ as } t \rightarrow \infty\big\}.$
 %
-\item $N \not = \emptyset:$
-\par 
-Mimic the same reasoning over $\psi_i(C)$. Replace $C$ with $\psi_i(C)$ and WLOG assume that $i$ is $n$ so we work in dimension $n-1$ with a closed semi-algebraic curve in $\R^{n-1}$. By an injection argument, we end up with the $n=2$ case (an inductive argument can be made with with having $n=2$ as the base case - \td).  
-\end{enumerate}
+\begin{lemma}
+    The set $N_1$ is not empty. 
+\end{lemma}
+%
+\begin{proof}
+It follows from Lemma \ref{lemma:unboundedCoordinate} that there exists $i \in \{2,\hdots,n\}$ with $g_i(t) \rightarrow \infty$ as $t
+\rightarrow e_1$.
+%\ms{Yes. The idea is to say that, if for some $i$ $\pi_i(\vartheta(t))$ tends to $\infty$ when $t\to e_1$, then $i\in N_1$ because $g_i$ is monotone (and $\pi_i(C)\neq \R$)}. 
+WLOG assume $i=2.$ Since
+$g_2(t)$ is monotonic, as $t$ ranges from $e_1$ to $+\infty, g_2(t)$ is decreasing and thus monotonically decreasing. We cannot have that $g_2(t)$ tends to $-\infty$ because then as $t$ tends from $e_1$ to $+\infty$, $g_2(t)$ would cover the entire real line violating our assumption that $\pi_2(C) \not = \R$. Therefore, $g_2(t) \rightarrow e_2$ as $t$ tends from $e_1$ to $+\infty$.
+\end{proof}
+%
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection*{Assume the dimension of $C$ is $d\geq 1$}
+
+
+
+
+%%%%%%%%%%%%%%%
+\paragraph*{Conclusion.}
+Since we have shown that $g_2(t) \rightarrow \infty$ as $t \rightarrow e_1$ and $g_2(t) \rightarrow e_2$ as $t \rightarrow \infty$, $g_2(t)$ must cross the hyperplane $x_1-x_2=0$.  Therefore $C$ meets $x_1-x_2=0$, proving Proposition \ref{prop:main} for the $d=1$ case.  
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dimension $d>1$ case}
+Let $\{i_1,\hdots,i_d\} \subset \{1,\hdots,n\},$ and let $\pi$ denote $\pi_{i_1,\hdots,i_d}.$ By the semi-algebraic implicit function theorem, we can now obtain a parameterization
+\[
+\big\{\vartheta(t_1,\hdots,t_d) = \left(t_1,\hdots,t_d,g_{d+1}(t_1,\hdots,t_d),\hdots,g_{n}(t_1,\hdots,t_d)\right)~|~ (t_1,\hdots,t_d) \in \pi(C)\big\} \subset \C^n.
+\]
+where $g_{d+1}(t),\hdots,g_n(t)$ are semi-algebraic functions.  Again, $g_{d+1}(t),\hdots,g_n(t)$ are diffeomorphisms because $C$ is smooth. Now, since we assume that $\pi(C) \not = \R^d,$ we know that $\pi(C)$ has boundary points; we select a boundary point as follows. Put $S = \bd\left( \pi(C) \right)$ and note that $\dim S \leq \dim \overline{S}.$ Take a real, regular point $\alpha \in \overline{S}.$ Locally, the boundary at $\alpha$ will look like an affine linear space (with a tangent space). Now, by this reasoning together with the \textit{Curve Selection Lemma} \cite{CurveSelectionLemma},  
+we obtain a line segment $\gamma: (0,1] \rightarrow \pi(C)$ that can be extended continuously to $\gamma(0)=\alpha.$ 
+%
+\begin{lemma}
+For $i \in \{1,\hdots,n\}$, the functions $g_i \circ \gamma$ have no critical points. 
+\end{lemma}
+%
+%
+\begin{proof}
 \td 
+\end{proof}
+%
+%
+\begin{lemma}
+For $i \in \{1,\hdots,n\}$, the functions $g_i \circ \gamma$ are monotonic. 
+\end{lemma}
+%
+%
+\begin{proof}
+\td 
+\end{proof}
+%
+\noindent 
+Put $Z = C \cap \pi^{-1}(\gamma).$ 
+%
+\begin{lemma}
+The dimension of $Z$ is $1$. 
+\end{lemma}
+%
+%
+\begin{proof}
+Let $d_Z$ be the dimension of $Z$. It is clear that $1 \leq d_Z \leq d$. Now, the 
+\textit{Theorem of the Dimension of Fibres}\cite{Shafarevich} tells us that for a generic $\bm y \in \C^d$, $C \cap \pi^{-1}(\bm y)$ is finite. Hence, the dimension of $C \cap \pi^{-1}(\gamma)$ is at most $1$ and $d_Z=1$. Now consider that $\bm y \in \C^d$ is not generic \td  
+\end{proof}
+%
+%
+\begin{lemma}\label{lemma:DimensionOneAssumptionsHold}
+For all $i \in \{1,\hdots,n\}$, 
+\begin{enumerate}
+    \item $Z \cap \crit(\pi_i,V) = \emptyset$;
+    \item $\pi_i(Z) \not = \R$.
+\end{enumerate}
+\end{lemma}
+%
+%
+\begin{proof}
+If $Z \cap \crit(\pi_i,V) \not = \emptyset$ then since $Z \subset C$ we contradict our assumption that $C \cap \crit(\pi_i,V) = \emptyset$. Similarily, if $\pi_i(Z) = \R$ then we contradict our assumption that $\pi_i(C) \not = \R.$  
+\end{proof}
+%
 
 
 
 
 
+
+
+
+
+%%%%%%%%%%%%%%%
+\paragraph*{Conclusion.}
+It follows that distinct $i,j \in\{1,\hdots,n\}$ exist with $Z \cap \{ x_i= x_j\} \not = \emptyset$ or 
+$Z \cap \{ x_i= -x_j\} \not = \emptyset.$ Since $Z \subset C,$ we have proven Proposition \ref{prop:main}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\paragraph*{Notes.}
 \ms{We can try to extend the reasoning this way. We consider the projection on
-  the $(x_1, \ldots, x_d)$-space. Using again something like the semi-algebraic
-  implicit function theorem, we should be able to parameterize all coordinates
-  points in $C$ with $d$-variate continuous semi-algebraic functions $g_{d+1},
-  \ldots, g_n$ (provided that $C$ does not intersect the polar variety
-  associated to the projection on this $(x_1, \ldots, x_d)$-space). Since $C$ is
+the $(x_1, \ldots, x_d)$-space. Using again something like the semi-algebraic implicit function theorem, we should be able to parameterize all coordinates points in $C$ with $d$-variate continuous semi-algebraic functions $g_{d+1}, \ldots, g_n$ (provided that $C$ does not intersect the polar variety associated to the projection on this $(x_1, \ldots, x_d)$-space). Since $C$ is
   assumed to be smooth, these $g_i$'s should be diffeomorphisms.}
 
 \ms{Now we take $\alpha$ in the boundary of the projection $\pi(C)$ of $C$ on
@@ -455,5 +364,50 @@ Mimic the same reasoning over $\psi_i(C)$. Replace $C$ with $\psi_i(C)$ and WLOG
 any polar variety associated to projections on $d$-dimensional coordinate
 subspaces will ``transfer'' to $C\cap \pi^{-1}(\gamma)$ the properties needed to
 apply the result above (in the case $d = 1$).}
+%
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%
+\section{Deterministic algorithms}
+
+
+
+%%%%%%%%%%%%%%%
+\subsection{Computing the dimension of polar varieties}
+
+
+
+
+%%%%%%%%%%%%%%%
+\subsection{Counting real roots of zero-dimensional polynomial systems}
+In \cite{BasuPollackRoy2006} there are deterministic algorithms with complexity $d^{O(n)}$. Our goal is to obtain a practical algorithm with sharper complexity. 
+
+
+
+%%%%%%%%%%%%%%%
+\subsection{Deciding if algebraic sets have finitely many complex solutions}
+No algorithms in \cite{BasuPollackRoy2006} for this problem. 
+
+
+
+\newpage 
+\bibliographystyle{plain}
+\bibliography{references.bib}
+\newpage 
+
+
+
+
 
 \end{document}
