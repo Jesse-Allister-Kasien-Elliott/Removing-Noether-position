@@ -266,7 +266,7 @@ Let $\{i_1,\hdots,i_d\} \subset \{1,\hdots,n\},$ and let $\pi$ denote $\pi_{i_1,
 \[
 \big\{\vartheta(t_1,\hdots,t_d) = \left(t_1,\hdots,t_d,g_{d+1}(t_1,\hdots,t_d),\hdots,g_{n}(t_1,\hdots,t_d)\right)~|~ (t_1,\hdots,t_d) \in \pi(C)\big\} \subset \C^n.
 \]
-where $g_{d+1}(t),\hdots,g_n(t)$ are semi-algebraic functions.  Again, $g_{d+1}(t),\hdots,g_n(t)$ are diffeomorphisms because $C$ is smooth. Now, since we assume that $\pi(C) \not = \R^d,$ we know that $\pi(C)$ has boundary points; we select a boundary point as follows. Put $S = \bd\left( \pi(C) \right)$ and note that $\dim S \leq \dim \overline{S}.$ Take a real, regular point $\alpha \in \overline{S}.$ Locally, the boundary at $\alpha$ will look like an affine linear space (with a tangent space). Now, by this reasoning together with the \textit{Curve Selection Lemma} \cite{CurveSelectionLemma},  
+where $g_{d+1}(t),\hdots,g_n(t)$ are semi-algebraic functions.  Again, $g_{d+1}(t),\hdots,g_n(t)$ are diffeomorphisms because $C$ is smooth. Now, since we assume that $\pi(C) \not = \R^d,$ we know that $\pi(C)$ has boundary points, which we select as follows. Put $S = \bd\left( \pi(C) \right)$ and note that $\dim S \leq \dim \overline{S}.$ Take a real, regular point $\alpha \in \overline{S}.$ Locally, the boundary at $\alpha$ will look like an affine linear space (with a tangent space). Now, by this reasoning together with the \textit{Curve Selection Lemma} \cite{CurveSelectionLemma},  
 we obtain a line segment $\gamma: (0,1] \rightarrow \pi(C)$ that can be extended continuously to $\gamma(0)=\alpha.$ 
 %
 \begin{lemma}
@@ -275,7 +275,7 @@ For $i \in \{1,\hdots,n\}$, the functions $g_i \circ \gamma$ have no critical po
 %
 %
 \begin{proof}
-\td 
+\color{red} Am I correct that, since $g_i \circ \gamma$ is a univariate real function in $t$,  $t^\star \in [0,1]$ is a critical point when either  $\frac{d}{dt}\left(g_i \circ \gamma\right)(t^\star)$ does not exist or $\frac{d}{dt}\left(g_i \circ \gamma\right)(t^\star)=0$?\color{black}
 \end{proof}
 %
 %
@@ -285,7 +285,7 @@ For $i \in \{1,\hdots,n\}$, the functions $g_i \circ \gamma$ are monotonic.
 %
 %
 \begin{proof}
-\td 
+Since $g_i \circ \gamma$ has no critical points, for all $t \in [0,1], \frac{d}{dt}\left(g_i \circ \gamma\right)(t)\not =0.$ It follows that $g_i \circ \gamma$ are monotonic. 
 \end{proof}
 %
 \noindent 
