@@ -191,7 +191,7 @@ For $d=1$, we assume that for all $i \in \{1,\hdots,n\},$
 %
 \begin{proof}
 Assume for contradiction that $\pi_i(C)$ is bounded for all $i \in \{1,\hdots,n\}$, and let $\pi_i(C) = (e_i,e_i').$
-Notice that $C$ is therefore closed and bounded, and therefore compact. It follows that $\pi_i(C)=(e_i,e_i')$ are all compact, which is a contradiction.
+Notice that $C$ is therefore closed and bounded, and therefore compact. It follows that $\pi_i(C)$ are all compact, which contradicts that $\pi_i(C) = (e_i,e_i')$ are all open. 
 \end{proof}
 %
 \noindent
@@ -227,7 +227,7 @@ at $C$, at a point in $\crit(\pi_i,V)$; it would give $
 $ with
 %\todo{Not so clear; I believe there is a mistake. Only one partial derivative cancels.} 
 $g'_i(t)=0.$ Therefore, since by assumption $C \cap \crit(\pi_i,V) = \emptyset$ for all $i \in \{1,\hdots,n\}$,
-$g_2',\hdots,g_n'$ never vanish. It follows that $g_2',\hdots,g_n'$ are  monotonic.
+$g_2',\hdots,g_n'$ never vanish. It follows that $g_2,\hdots,g_n$ are  monotonic.
 \end{proof}
 %
 \noindent
@@ -238,11 +238,11 @@ Now, consider the set $N_1 = \big\{i~|~g_i(t) \rightarrow \infty \textrm{ as } t
 \end{lemma}
 %
 \begin{proof}
-It follows from Lemma \ref{lemma:unboundedCoordinate} that there exists $i \in \{2,\hdots,n\}$ with $g_i(t) \rightarrow \infty$ as $t
+It follows from Lemma \ref{lemma:unboundedCoordinate} that there exists an index $i$ in $\{2,\hdots,n\}$ with $g_i(t) \rightarrow \infty$ as $t
 \rightarrow e_1$.
 %\ms{Yes. The idea is to say that, if for some $i$ $\pi_i(\vartheta(t))$ tends to $\infty$ when $t\to e_1$, then $i\in N_1$ because $g_i$ is monotone (and $\pi_i(C)\neq \R$)}. 
 WLOG assume $i=2.$ Since
-$g_2(t)$ is monotonic, as $t$ ranges from $e_1$ to $+\infty, g_2(t)$ is decreasing and thus monotonically decreasing. We cannot have that $g_2(t)$ tends to $-\infty$ because then as $t$ tends from $e_1$ to $+\infty$, $g_2(t)$ would cover the entire real line violating our assumption that $\pi_2(C) \not = \R$. Therefore, $g_2(t) \rightarrow e_2$ as $t$ tends from $e_1$ to $+\infty$.
+$g_2(t)$ is monotonic, as $t$ ranges from $e_1$ to $+\infty, g_2(t)$ is decreasing and thus monotonically decreasing. We cannot have that $g_2(t)$ tends to $-\infty$ because then as $t$ tends from $e_1$ to $+\infty$, $g_2(t)$ would cover the entire real line, violating our assumption that $\pi_2(C) \not = \R$. Therefore, $g_2(t) \rightarrow e_2$ as $t$ tends from $e_1$ to $+\infty$.
 \end{proof}
 %
 
@@ -266,7 +266,7 @@ Let $\{i_1,\hdots,i_d\} \subset \{1,\hdots,n\},$ and let $\pi$ denote $\pi_{i_1,
 \[
 \big\{\vartheta(t_1,\hdots,t_d) = \left(t_1,\hdots,t_d,g_{d+1}(t_1,\hdots,t_d),\hdots,g_{n}(t_1,\hdots,t_d)\right)~|~ (t_1,\hdots,t_d) \in \pi(C)\big\} \subset \C^n.
 \]
-where $g_{d+1}(t),\hdots,g_n(t)$ are semi-algebraic functions.  Again, $g_{d+1}(t),\hdots,g_n(t)$ are diffeomorphisms because $C$ is smooth. Now, since we assume that $\pi(C) \not = \R^d,$ we know that $\pi(C)$ has boundary points, which we select as follows. Put $S = \bd\left( \pi(C) \right)$ and note that $\dim S \leq \dim \overline{S}.$ Take a real, regular point $\alpha \in \overline{S}.$ Locally, the boundary at $\alpha$ will look like an affine linear space (with a tangent space). Now, by this reasoning together with the \textit{Curve Selection Lemma} \cite{CurveSelectionLemma},  
+where $g_{d+1}(t),\hdots,g_n(t)$ are semi-algebraic functions.  Furthermore, $g_{d+1}(t),\hdots,g_n(t)$ are diffeomorphisms because $C$ is smooth. Now, since we assume that $\pi(C) \not = \R^d,$ we know that $\pi(C)$ has boundary points, which we select as follows. Put $S = \bd\left( \pi(C) \right)$ and note that $\dim S \leq \dim \overline{S}.$ Take a real, regular point $\alpha \in \overline{S}.$ Locally, the boundary at $\alpha$ will look like an affine linear space (with a tangent space). Now, by this reasoning together with the \textit{Curve Selection Lemma} \cite{CurveSelectionLemma},  
 we obtain a line segment $\gamma: (0,1] \rightarrow \pi(C)$ that can be extended continuously to $\gamma(0)=\alpha.$ 
 %
 \begin{lemma}
@@ -297,8 +297,8 @@ The dimension of $Z$ is $1$.
 %
 %
 \begin{proof}
-Let $d_Z$ be the dimension of $Z$. It is clear that $1 \leq d_Z \leq d$. Now, the 
-\textit{Theorem of the Dimension of Fibres}\cite{Shafarevich} tells us that for a generic $\bm y \in \C^d$, $C \cap \pi^{-1}(\bm y)$ is finite. Hence, the dimension of $C \cap \pi^{-1}(\gamma)$ is at most $1$ and $d_Z=1$. Now consider that $\bm y \in \C^d$ is not generic \td  
+Let $d_Z$ be the dimension of $Z$; it is clear that $1 \leq d_Z \leq d$. By the 
+\textit{Theorem of the Dimension of Fibres}\cite{Shafarevich}, for a generic $\bm y \in \C^d$, $C \cap \pi^{-1}(\bm y)$ is finite. Hence, the dimension of $C \cap \pi^{-1}(\gamma)$ is at most $1$ and $d_Z=1$. Now consider that $\bm y \in \C^d$ is not generic \td.
 \end{proof}
 %
 %
